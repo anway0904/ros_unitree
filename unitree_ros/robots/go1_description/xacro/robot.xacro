@@ -12,7 +12,10 @@
     <xacro:include filename="$(find go1_description)/xacro/depthCamera.xacro"/>
     <xacro:include filename="$(find go1_description)/xacro/ultraSound.xacro"/>
     <!-- <xacro:include filename="$(find go1_gazebo)/launch/stairs.urdf.xacro"/> -->
-    <xacro:include filename="$(find go1_description)/xacro/lidar.xacro"/>
+    
+    <!--################## LIDAR UPDATE ########################-->
+    <!--xacro:include filename="$(find go1_description)/xacro/lidar.xacro"/-->
+    <xacro:include filename="$(find ouster_description)/urdf/OS1-64.urdf.xacro" />
 
     <!-- <xacro:stairs stairs="15" xpos="0" ypos="0" zpos="0" /> -->
 
@@ -120,7 +123,7 @@
         <origin rpy="0 ${PI/2} 0" xyz="-0.0825 -0.0125 -0.04365"/>
     </xacro:depthCamera>
 
-    <joint name="camera_laserscan_joint_left" type="fixed">
+    <!--joint name="camera_laserscan_joint_left" type="fixed">
         <origin rpy="0 0.2618 0" xyz="0 0 0"/>
         <parent link="camera_left"/>
         <child link="camera_laserscan_link_left"/>
@@ -136,7 +139,7 @@
     </joint>
 
     <link name="camera_laserscan_link_right">
-    </link>
+    </link-->
 
     <xacro:ultraSound name="left">
         <origin rpy="0 0.2618 ${PI/2}" xyz="-0.0535  0.0826 0.00868"/>
@@ -150,8 +153,8 @@
         <origin rpy="0 0 0" xyz="0.2747 0.0 -0.0088"/>
     </xacro:ultraSound>
 
-    <xacro:lidar parent="trunk">
-        <origin rpy="0 0 0" xyz="0.05 0 0.08"/>
-    </xacro:lidar>
-
+    <xacro:OS1-64 parent="base" lasers="32" samples="256">
+        <origin rpy="0 0 0" xyz="0.05 0 0.06"/>
+    </xacro:OS1-64>
+ 
 </robot>
